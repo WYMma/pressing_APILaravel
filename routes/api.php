@@ -12,16 +12,16 @@ Route::get('/user', function (Request $request) {
 
 Route::post('/sanctum/token', function (Request $request) {
     $request->validate([
-        'email' => 'required|email',
+        'phone' => 'required|string',
         'password' => 'required',
         'device_name' => 'required',
     ]);
 
-    $user = User::where('email', $request->email)->first();
+    $user = User::where('phone', $request->phone)->first();
 
     if (! $user || ! Hash::check($request->password, $user->password)) {
         throw ValidationException::withMessages([
-            'email' => ['The provided credentials are incorrect.'],
+            'phone' => ['The provided credentials are incorrect.'],
         ]);
     }
 

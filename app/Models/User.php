@@ -18,9 +18,9 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
-        'email',
+        'phone',
         'password',
+        'role',
     ];
 
     /**
@@ -33,16 +33,38 @@ class User extends Authenticatable
         'remember_token',
     ];
 
+    protected $appends = ['avatar'];
+
+    public function getAvatarAttribute(){
+        return "https://www.gravatar.com/avatar/" . md5(strtolower(trim($this->phone)));
+
+    }
+
     /**
-     * Get the attributes that should be cast.
+     * The attributes that should be cast to native types.
      *
      * @return array<string, string>
      */
     protected function casts(): array
     {
         return [
-            'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    /**
+     * Set default values for attributes.
+     *
+     * @return void
+     */
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($model) {
+            if (empty($model->role)) {
+                $model->role = 'client';
+            }
+        });
     }
 }
