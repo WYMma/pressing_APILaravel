@@ -27,7 +27,7 @@ class UserController extends Controller
         $user = User::create([
             'phone' => $validatedData['phone'],
             'password' => Hash::make($validatedData['password']),
-            'role' => 'client',
+            'role' => 'Client',
             'device_name' => $validatedData['device_name'],
             // Add any other user fields if needed
         ]);
