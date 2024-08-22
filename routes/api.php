@@ -1,10 +1,12 @@
 <?php
 
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
+use App\Http\Controllers\ClientController;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -33,3 +35,7 @@ Route::get('/user/revoke', function (Request $request) {
     $user->tokens()->delete();
     return 'Tokens Revoked';
 })->middleware('auth:sanctum');
+
+Route::get('/client/{userId}', [ClientController::class, 'getClientByUserId'])->middleware('auth:sanctum');
+
+Route::post('/CreateUser', [UserController::class, 'createUser']);

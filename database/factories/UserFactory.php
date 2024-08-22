@@ -20,19 +20,9 @@ class UserFactory extends Factory
     {
         return [
             'phone' => fake()->unique()->phoneNumber(),
-            'role' => 'client', // Default value
+            'role' => 'Client', // Default value
             'password' => Hash::make('password'), // password
             'remember_token' => Str::random(10),
         ];
-    }
-
-    /**
-     * Indicate that the model's email address should be unverified.
-     */
-    public function unverified(): static
-    {
-        return $this->state(fn (array $attributes) => [
-            'email_verified_at' => null,
-        ]);
     }
 }

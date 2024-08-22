@@ -63,7 +63,7 @@ class User extends Authenticatable
 
         static::creating(function ($model) {
             if (empty($model->role)) {
-                $model->role = 'client';
+                $model->role = 'Client';
             }
         });
     }
