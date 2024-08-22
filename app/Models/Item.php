@@ -13,7 +13,7 @@ class Item extends Model
 
     protected $primaryKey = 'itemID';
 
-    public $timestamps = false;
+    public $timestamps = true;
 
     protected $fillable = [
         'categorieID',

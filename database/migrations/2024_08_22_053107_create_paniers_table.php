@@ -11,7 +11,7 @@ return new class extends Migration
         Schema::create('paniers', function (Blueprint $table) {
             $table->id('cartID');
             $table->decimal('total_price', 10, 2)->default(0.00);
-            $table->timestamps(0);
+            $table->timestamps();
         });
     }
 

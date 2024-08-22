@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreign('serviceID')->references('id')->on('Services');
             $table->foreign('cartID')->references('cartID')->on('paniers');
             $table->foreign('itemID')->references('itemID')->on('items');
+            $table->timestamps();
         });
     }
 

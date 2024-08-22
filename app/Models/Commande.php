@@ -13,7 +13,7 @@ class Commande extends Model
 
     protected $primaryKey = 'commandeID';
 
-    public $timestamps = false;
+    public $timestamps = true;
 
     protected $fillable = [
         'clientID',

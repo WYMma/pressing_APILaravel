@@ -13,7 +13,7 @@ class Mission extends Model
 
     protected $primaryKey = 'missionID';
 
-    public $timestamps = false;
+    public $timestamps = true;
 
     protected $fillable = [
         'description',

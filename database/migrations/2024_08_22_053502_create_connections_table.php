@@ -12,7 +12,7 @@ return new class extends Migration
             $table->id('connectionID');
             $table->unsignedBigInteger('userID');
             $table->text('tokenFCM');
-            $table->timestamps(0);
+            $table->timestamps();
 
             $table->foreign('userID')->references('id')->on('users');
         });

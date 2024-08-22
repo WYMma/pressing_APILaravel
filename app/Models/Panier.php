@@ -13,7 +13,7 @@ class Panier extends Model
 
     protected $primaryKey = 'cartID';
 
-    public $timestamps = false;
+    public $timestamps = true;
 
     protected $fillable = [
         'total_price',

@@ -13,7 +13,7 @@ class Equipe extends Model
 
     protected $primaryKey = 'equipeID';
 
-    public $timestamps = false;
+    public $timestamps = true;
 
     protected $fillable = [
         'nomEquipe',

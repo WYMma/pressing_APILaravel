@@ -13,7 +13,7 @@ class Personnel extends Model
 
     protected $primaryKey = 'personnelID';
 
-    public $timestamps = false;
+    public $timestamps = true;
 
     protected $fillable = [
         'userID',

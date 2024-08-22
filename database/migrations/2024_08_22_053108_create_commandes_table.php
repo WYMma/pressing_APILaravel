@@ -26,7 +26,7 @@ return new class extends Migration
             $table->boolean('isInProgress')->default(false);
             $table->boolean('isShipped')->default(false);
             $table->boolean('isDelivered')->default(false);
-            $table->timestamps(0);
+            $table->timestamps();
 
             $table->foreign('clientID')->references('clientID')->on('clients');
             $table->foreign('addressID')->references('addressID')->on('Addresses');

@@ -13,9 +13,9 @@ class Addresse extends Model
 
     protected $primaryKey = ['addressID', 'clientID'];
 
-    public $incrementing = false;
+    public $incrementing = true;
 
-    public $timestamps = false;
+    public $timestamps = true;
 
     protected $fillable = [
         'clientID',

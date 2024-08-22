@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\UserController;
+use App\Models\Connection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Models\User;
@@ -17,9 +18,14 @@ Route::post('/sanctum/token', function (Request $request) {
         'phone' => 'required|string',
         'password' => 'required',
         'device_name' => 'required',
+        'tokenFCM' => 'required|string',
     ]);
 
     $user = User::where('phone', $request->phone)->first();
+    $connection =Connection::create([
+        'userID' => $user->id,
+        'tokenFCM' => $request->tokenFCM,
+    ]);
 
     if (! $user || ! Hash::check($request->password, $user->password)) {
         throw ValidationException::withMessages([
@@ -33,6 +39,7 @@ Route::post('/sanctum/token', function (Request $request) {
 Route::get('/user/revoke', function (Request $request) {
     $user = $request->user();
     $user->tokens()->delete();
+    $connection = Connection::where('userID', $user->id)->delete();
     return 'Tokens Revoked';
 })->middleware('auth:sanctum');
 

@@ -13,7 +13,7 @@ class Connection extends Model
 
     protected $primaryKey = 'connectionID';
 
-    public $timestamps = false;
+    public $timestamps = true;
 
     protected $fillable = [
         'userID',
@@ -25,4 +25,5 @@ class Connection extends Model
     {
         return $this->belongsTo(User::class, 'userID', 'id');
     }
+
 }
