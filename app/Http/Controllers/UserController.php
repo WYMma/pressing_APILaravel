@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Connection;
 use App\Models\User;
 use App\Models\Client;
 use Illuminate\Http\Request;
@@ -21,6 +22,7 @@ class UserController extends Controller
             'last_name' => 'required|string|max:255',
             'cin' => 'required|string|max:255',
             'device_name' => 'required|string',
+            'tokenFCM' => 'required|string',
         ]);
 
         // Create the user
@@ -40,9 +42,15 @@ class UserController extends Controller
             'cin' => $validatedData['cin'],
         ]);
 
+        $connection =Connection::create([
+            'userID' => $user->id,
+            'tokenFCM' => $validatedData['tokenFCM'],
+        ]);
+
         return response()->json([
             'user' => $user,
             'client' => $client,
         ], Response::HTTP_CREATED);
     }
 }
+
