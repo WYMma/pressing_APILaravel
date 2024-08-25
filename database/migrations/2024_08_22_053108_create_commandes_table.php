@@ -11,7 +11,7 @@ return new class extends Migration
         Schema::create('commandes', function (Blueprint $table) {
             $table->id('commandeID');
             $table->unsignedBigInteger('clientID');
-            $table->unsignedInteger('addressID');
+            $table->unsignedBigInteger('addressID');
             $table->dateTime('pickUpDate');
             $table->dateTime('deliveryDate');
             $table->string('paymentMethod');

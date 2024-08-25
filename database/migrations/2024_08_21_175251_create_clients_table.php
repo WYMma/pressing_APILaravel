@@ -13,7 +13,7 @@ return new class extends Migration
             $table->foreignId('userID')->constrained('users')->onDelete('cascade');
             $table->string('first_name');
             $table->string('last_name');
-            $table->string('cin');
+            $table->string('cin')->unique();;
             $table->string('email')->nullable();
             $table->timestamps(); // This will create `created_at` and `updated_at` columns
         });

@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Auth\ChangePasswordController;
+use App\Http\Controllers\CreditCardController;
 use App\Http\Controllers\UserController;
 use App\Models\Connection;
 use Illuminate\Http\Request;
@@ -8,10 +10,9 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\AddresseController;
 
-Route::get('/user', function (Request $request) {
-    return $request->user();
-})->middleware('auth:sanctum');
+
 
 Route::post('/sanctum/token', function (Request $request) {
     $request->validate([
@@ -22,7 +23,7 @@ Route::post('/sanctum/token', function (Request $request) {
     ]);
 
     $user = User::where('phone', $request->phone)->first();
-    $connection =Connection::create([
+    Connection::create([
         'userID' => $user->id,
         'tokenFCM' => $request->tokenFCM,
     ]);
@@ -36,13 +37,35 @@ Route::post('/sanctum/token', function (Request $request) {
     return $user->createToken($request->device_name)->plainTextToken;
 });
 
-Route::get('/user/revoke', function (Request $request) {
-    $user = $request->user();
-    $user->tokens()->delete();
-    $connection = Connection::where('userID', $user->id)->delete();
-    return 'Tokens Revoked';
-})->middleware('auth:sanctum');
 
-Route::get('/client/{userId}', [ClientController::class, 'getClientByUserId'])->middleware('auth:sanctum');
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/user', function (Request $request) {
+        return $request->user();
+    });
+    Route::get('/user/revoke', function (Request $request) {
+        $user = $request->user();
+        $user->tokens()->delete();
+        Connection::where('userID', $user->id)->delete();
+        return 'Tokens Revoked';
+    });
+    Route::get('/client/{userId}', [ClientController::class, 'getClientByUserId']);
+    Route::put('/client/{clientId}', [ClientController::class, 'updateClient']);
+    Route::post('/change-password', [ChangePasswordController::class, 'changePassword']);
+});
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/addresses/{clientId}', [AddresseController::class, 'getAddresses']);  // Fetch addresses
+    Route::post('/addresses', [AddresseController::class, 'createAddress']);          // Create address
+    Route::put('/addresses/{addressID}', [AddresseController::class, 'updateAddress']); // Update address
+    Route::delete('/addresses/{addressID}', [AddresseController::class, 'deleteAddress']); // Delete address
+});
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::post('/credit-cards', [CreditCardController::class, 'store']);
+    Route::put('/credit-cards/{cardID}', [CreditCardController::class, 'update']);
+    Route::get('/credit-cards/{clientID}', [CreditCardController::class, 'index']);
+    Route::delete('/credit-cards/{cardID}', [CreditCardController::class, 'destroy']); // Delete address
+});
+
 
 Route::post('/CreateUser', [UserController::class, 'createUser']);

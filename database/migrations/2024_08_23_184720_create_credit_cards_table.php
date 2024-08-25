@@ -13,16 +13,16 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('Addresses', function (Blueprint $table) {
-            $table->id('addressID'); // Primary key
-            $table->bigInteger('clientID')->unsigned();
-            $table->string('area', 50);
-            $table->string('street', 255);
-            $table->string('city', 255);
-            $table->string('postal_code', 10);
-            $table->string('type')->nullable();
+        Schema::create('credit_cards', function (Blueprint $table) {
+            $table->id('cardID');
+            $table->string('number');
+            $table->string('holder');
+            $table->string('expiry');
+            $table->string('cvv');
+            $table->unsignedBigInteger('clientID');
             $table->timestamps();
 
+            // Foreign key constraint
             $table->foreign('clientID')->references('clientID')->on('clients')->onDelete('cascade');
         });
     }
@@ -34,6 +34,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('Addresses');
+        Schema::dropIfExists('credit_cards');
     }
 };

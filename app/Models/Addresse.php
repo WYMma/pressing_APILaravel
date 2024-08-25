@@ -11,7 +11,8 @@ class Addresse extends Model
 
     protected $table = 'Addresses';
 
-    protected $primaryKey = ['addressID', 'clientID'];
+    // The primary key is now a single key: addressID
+    protected $primaryKey = 'addressID';
 
     public $incrementing = true;
 

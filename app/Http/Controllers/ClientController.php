@@ -19,4 +19,19 @@ class ClientController extends Controller
 
         return response()->json($client);
     }
+
+    public function updateClient(Request $request, $clientId) {
+        $validatedData = $request->validate([
+            'first_name' => 'required|string',
+            'last_name' => 'required|string',
+            'cin' => 'required|string',
+            'email' => 'string',
+        ]);
+
+        $client = Client::findOrFail($clientId);
+
+        $client->update($validatedData);
+
+        return response()->json($client);
+    }
 }
