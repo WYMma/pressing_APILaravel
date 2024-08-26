@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\ChangePasswordController;
 use App\Http\Controllers\CreditCardController;
+use App\Http\Controllers\PersonnelsController;
 use App\Http\Controllers\UserController;
 use App\Models\Connection;
 use Illuminate\Http\Request;
@@ -36,6 +37,7 @@ Route::post('/sanctum/token', function (Request $request) {
 
     return $user->createToken($request->device_name)->plainTextToken;
 });
+Route::post('/CreateUser', [UserController::class, 'createUser']);
 
 
 Route::middleware('auth:sanctum')->group(function () {
@@ -51,6 +53,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/client/{userId}', [ClientController::class, 'getClientByUserId']);
     Route::put('/client/{clientId}', [ClientController::class, 'updateClient']);
     Route::post('/change-password', [ChangePasswordController::class, 'changePassword']);
+    Route::get('/personnel/{userId}', [PersonnelsController::class, 'getPersonnelByUserId']);
+    Route::put('/personnel/{personnelID}', [PersonnelsController::class, 'updatePersonnel']);
 });
 
 Route::middleware('auth:sanctum')->group(function () {
@@ -66,6 +70,3 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/credit-cards/{clientID}', [CreditCardController::class, 'index']);
     Route::delete('/credit-cards/{cardID}', [CreditCardController::class, 'destroy']); // Delete address
 });
-
-
-Route::post('/CreateUser', [UserController::class, 'createUser']);

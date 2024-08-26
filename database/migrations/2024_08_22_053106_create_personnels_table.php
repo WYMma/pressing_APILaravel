@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('last_name');
             $table->string('cin')->unique();
             $table->string('email')->nullable();
-            $table->timestamp('joined_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->timestamps();
 
             $table->foreign('userID')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('equipeID')->references('equipeID')->on('Equipe')->onDelete('set null');
