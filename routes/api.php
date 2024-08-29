@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ApiKeyController;
 use App\Http\Controllers\Auth\ChangePasswordController;
 use App\Http\Controllers\CreditCardController;
 use App\Http\Controllers\PersonnelsController;
@@ -69,4 +70,12 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::put('/credit-cards/{cardID}', [CreditCardController::class, 'update']);
     Route::get('/credit-cards/{clientID}', [CreditCardController::class, 'index']);
     Route::delete('/credit-cards/{cardID}', [CreditCardController::class, 'destroy']); // Delete address
+});
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('api-keys', [ApiKeyController::class, 'index']);
+    Route::post('api-keys', [ApiKeyController::class, 'store']);
+    Route::get('api-keys/{id}', [ApiKeyController::class, 'show']);
+    Route::put('api-keys/{id}', [ApiKeyController::class, 'update']);
+    Route::delete('api-keys/{id}', [ApiKeyController::class, 'destroy']);
 });
