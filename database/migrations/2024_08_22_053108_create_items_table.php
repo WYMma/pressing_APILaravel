@@ -13,9 +13,9 @@ return new class extends Migration
             $table->unsignedBigInteger('categorieID');
             $table->string('name');
             $table->decimal('price', 10, 2);
-            $table->binary('photo');
-
-            $table->foreign('categorieID')->references('id')->on('Categories');
+            $table->string('photo');
+            $table->foreign('categorieID')->references('categorieID')->on('Categories');
+            $table->timestamps();
         });
     }
 

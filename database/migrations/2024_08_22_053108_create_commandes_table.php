@@ -20,7 +20,6 @@ return new class extends Migration
             $table->string('status')->nullable();
             $table->unsignedBigInteger('cartID')->nullable();
             $table->decimal('totalPrice', 10, 2);
-            $table->unsignedBigInteger('transporterID')->nullable();
             $table->boolean('isConfirmed')->default(false);
             $table->boolean('isPickedUp')->default(false);
             $table->boolean('isInProgress')->default(false);
@@ -28,10 +27,9 @@ return new class extends Migration
             $table->boolean('isDelivered')->default(false);
             $table->timestamps();
 
-            $table->foreign('clientID')->references('clientID')->on('clients');
+            $table->foreign('clientID')->references('clientID')->on('clients')->onDelete('cascade');;
             $table->foreign('addressID')->references('addressID')->on('Addresses');
-            $table->foreign('cartID')->references('cartID')->on('paniers');
-            $table->foreign('transporterID')->references('personnelID')->on('personnels');
+            $table->foreign('cartID')->references('cartID')->on('paniers')->onDelete('cascade');;
         });
     }
 

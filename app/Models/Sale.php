@@ -6,26 +6,27 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 
-class Service extends Model
+class Sale extends Model
 {
     use HasFactory;
 
-    protected $table = 'services';
-
-    protected $primaryKey = 'serviceID';
-
+    protected $table = 'sales';
+    protected $primaryKey = 'saleID';
     public $timestamps = true;
 
     protected $fillable = [
         'name',
         'description',
-        'price',
+        'discount',
+        'start_date',
+        'end_date',
         'image',
+        'serviceID',
     ];
 
-    public function lignePanier()
+    public function service()
     {
-        return $this->hasMany(LignePanier::class, 'serviceID', 'serviceID');
+        return $this->belongsTo(Service::class, 'serviceID');
     }
 
     // Accessor to get the full URL of the image
@@ -34,15 +35,16 @@ class Service extends Model
         return $this->image ? Storage::url($this->image) : null;
     }
 
-    // Delete the image file when the service is deleted
+    // Delete the image file when the sale is deleted
     public static function boot()
     {
         parent::boot();
 
-        static::deleting(function ($service) {
-            if ($service->image) {
-                Storage::delete($service->image);
+        static::deleting(function ($sale) {
+            if ($sale->image) {
+                Storage::delete($sale->image);
             }
         });
     }
 }
+

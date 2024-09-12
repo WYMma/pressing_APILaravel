@@ -9,7 +9,7 @@ class LignePanier extends Model
 {
     use HasFactory;
 
-    protected $table = 'Ligne_Panier';
+    protected $table = 'lignepaniers';
 
     protected $primaryKey = 'id';
 
@@ -20,11 +20,18 @@ class LignePanier extends Model
         'serviceID',
         'cartID',
         'itemID',
+        'initialPrice',
+        'productPrice',
+        'categorieID',
     ];
 
+    public function category()
+    {
+        return $this->belongsTo(Categorie::class, 'categorieID', 'categorieID');
+    }
     public function service()
     {
-        return $this->belongsTo(Services::class, 'serviceID', 'id');
+        return $this->belongsTo(Service::class, 'serviceID', 'serviceID');
     }
 
     public function panier()

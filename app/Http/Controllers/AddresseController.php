@@ -14,6 +14,13 @@ class AddresseController extends Controller
         return response()->json($addresses);
     }
 
+    // Get a single address by ID
+    public function getAddressById($addressID)
+    {
+        $address = Addresse::findOrFail($addressID);
+        return response()->json($address);
+    }
+
     // Create a new address for a client
     public function createAddress(Request $request)
     {

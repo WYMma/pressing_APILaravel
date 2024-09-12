@@ -20,9 +20,7 @@ class Client extends Model
         'joined_at',
     ];
 
-    // Specify the table if not following Laravel's convention
     protected $table = 'clients';
 
-    // If you want to use created_at and updated_at columns, remove the line below
     public $timestamps = true;
 }

@@ -9,7 +9,7 @@ class Commande extends Model
 {
     use HasFactory;
 
-    protected $table = 'Commande';
+    protected $table = 'Commandes';
 
     protected $primaryKey = 'commandeID';
 
@@ -26,7 +26,6 @@ class Commande extends Model
         'status',
         'cartID',
         'totalPrice',
-        'transporterID',
         'isConfirmed',
         'isPickedUp',
         'isInProgress',
@@ -42,17 +41,12 @@ class Commande extends Model
 
     public function address()
     {
-        return $this->belongsTo(Addresses::class, 'addressID', 'addressID');
+        return $this->belongsTo(Addresse::class, 'addressID', 'addressID');
     }
 
     public function panier()
     {
         return $this->belongsTo(Panier::class, 'cartID', 'cartID');
-    }
-
-    public function transporter()
-    {
-        return $this->belongsTo(Personnel::class, 'transporterID', 'personnelID');
     }
 
     public function mission()

@@ -11,18 +11,17 @@ class Categorie extends Model
 
     protected $table = 'Categories';
 
-    protected $primaryKey = 'id';
+    protected $primaryKey = 'categorieID';
 
     public $timestamps = true;
 
     protected $fillable = [
         'name',
-        'photo',
         'description',
     ];
 
     public function items()
     {
-        return $this->hasMany(Item::class, 'categorieID', 'id');
+        return $this->hasMany(Item::class, 'categorieID', 'categorieID');
     }
 }

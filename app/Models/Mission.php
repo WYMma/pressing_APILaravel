@@ -9,7 +9,7 @@ class Mission extends Model
 {
     use HasFactory;
 
-    protected $table = 'Mission';
+    protected $table = 'missions';
 
     protected $primaryKey = 'missionID';
 
@@ -20,6 +20,7 @@ class Mission extends Model
         'equipeID',
         'date_mission',
         'commandeID',
+        'status',
         'created_at',
     ];
 

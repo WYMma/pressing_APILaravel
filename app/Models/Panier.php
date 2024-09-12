@@ -9,7 +9,7 @@ class Panier extends Model
 {
     use HasFactory;
 
-    protected $table = 'Panier';
+    protected $table = 'paniers';
 
     protected $primaryKey = 'cartID';
 
@@ -20,7 +20,7 @@ class Panier extends Model
         'created_at',
     ];
 
-    public function lignePanier()
+    public function LignePanier()
     {
         return $this->hasMany(LignePanier::class, 'cartID', 'cartID');
     }

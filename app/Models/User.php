@@ -36,7 +36,7 @@ class User extends Authenticatable
     protected $appends = ['avatar'];
 
     public function getAvatarAttribute(){
-        return "https://www.gravatar.com/avatar/" . md5(strtolower(trim($this->phone)));
+        return "/storage/images/ls_avatar.jpeg";
 
     }
 

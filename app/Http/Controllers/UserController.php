@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Connection;
 use App\Models\User;
 use App\Models\Client;
 use Illuminate\Http\Request;
@@ -31,6 +30,7 @@ class UserController extends Controller
             'password' => Hash::make($validatedData['password']),
             'role' => 'Client',
             'device_name' => $validatedData['device_name'],
+            'tokenFCM' => $validatedData['tokenFCM'],
             // Add any other user fields if needed
         ]);
 
@@ -40,11 +40,6 @@ class UserController extends Controller
             'first_name' => $validatedData['first_name'],
             'last_name' => $validatedData['last_name'],
             'cin' => $validatedData['cin'],
-        ]);
-
-        $connection =Connection::create([
-            'userID' => $user->id,
-            'tokenFCM' => $validatedData['tokenFCM'],
         ]);
 
         return response()->json([

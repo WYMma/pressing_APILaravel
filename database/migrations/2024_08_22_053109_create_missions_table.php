@@ -14,6 +14,7 @@ return new class extends Migration
             $table->unsignedBigInteger('equipeID')->nullable();
             $table->date('date_mission');
             $table->unsignedBigInteger('commandeID');
+            $table->string('status');
             $table->timestamps();
 
             $table->foreign('equipeID')->references('equipeID')->on('Equipe');

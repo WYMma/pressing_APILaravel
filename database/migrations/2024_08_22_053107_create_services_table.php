@@ -9,10 +9,12 @@ return new class extends Migration
     public function up()
     {
         Schema::create('services', function (Blueprint $table) {
-            $table->id('id');
+            $table->id('serviceID');
             $table->string('name');
             $table->text('description');
             $table->decimal('price', 10, 2);
+            $table->string('image')->nullable(); // This will store the image filename
+            $table->timestamps();
         });
     }
 

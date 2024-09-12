@@ -14,7 +14,7 @@ return new class extends Migration
             $table->text('tokenFCM');
             $table->timestamps();
 
-            $table->foreign('userID')->references('id')->on('users');
+            $table->foreign('userID')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
